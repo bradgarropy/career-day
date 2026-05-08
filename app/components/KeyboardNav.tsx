@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { SECTION_IDS } from "../lib/sections";
+
+type Props = {
+  sectionIds: readonly string[];
+};
 
 /**
  * Global keyboard navigation for the deck.
@@ -16,8 +19,9 @@ import { SECTION_IDS } from "../lib/sections";
  *
  * This component renders nothing; it just attaches listeners.
  */
-export const KeyboardNav = () => {
+export const KeyboardNav = ({ sectionIds }: Props) => {
   useEffect(() => {
+    const SECTION_IDS = sectionIds;
     /** The actual scrolling container is <main className="snap-y ... overflow-y-auto">. */
     const getScroller = (): HTMLElement | null => {
       const firstSection = document.getElementById(SECTION_IDS[0]);
@@ -151,7 +155,7 @@ export const KeyboardNav = () => {
       scroller?.removeEventListener("scroll", onScroll);
       window.clearTimeout(scrollDebounce);
     };
-  }, []);
+  }, [sectionIds]);
 
   return null;
 };

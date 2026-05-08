@@ -7,8 +7,8 @@ export const Tools = () => {
 
       <div className="mt-12 grid grid-cols-2 gap-12 items-start w-full">
         <div className="grid place-items-center gap-4">
-          <a href="/images/vscode.png" target="_blank" rel="noreferrer">
-            <img src="/images/vscode.png" alt="vscode screenshot" className="w-full h-auto" />
+          <a href="/images/vscode-2026.png" target="_blank" rel="noreferrer">
+            <img src="/images/vscode-2026.png" alt="vscode screenshot" className="w-full h-auto" />
           </a>
           <a href="https://code.visualstudio.com" target="_blank" rel="noreferrer">
             <img src="/images/vscode-logo.png" alt="vscode logo" className="h-[8vh] w-auto" />

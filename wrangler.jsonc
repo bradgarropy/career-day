@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "career-day",
+  "compatibility_date": "2026-05-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "./workers/app.ts",
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./build/client",
+  },
+  "observability": {
+    "enabled": true,
+  },
+}

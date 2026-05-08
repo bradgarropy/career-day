@@ -1,40 +1,34 @@
+import { Link } from "react-router";
 import type { Route } from "./+types/_index";
-import { AIDemo } from "../components/sections/AIDemo";
-import { AIMagic } from "../components/sections/AIMagic";
-import { Cloudflare } from "../components/sections/Cloudflare";
-import { Companies } from "../components/sections/Companies";
-import { Dashboard } from "../components/sections/Dashboard";
-import { Developer } from "../components/sections/Developer";
-import { Education } from "../components/sections/Education";
-import { Interesting } from "../components/sections/Interesting";
-import { LiveCode } from "../components/sections/LiveCode";
-import { Office } from "../components/sections/Office";
-import { Questions } from "../components/sections/Questions";
-import { Salary } from "../components/sections/Salary";
-import { Subjects } from "../components/sections/Subjects";
-import { Tools } from "../components/sections/Tools";
 
 export function meta(_: Route.MetaArgs) {
-  return [{ title: "Career Day" }, { name: "description", content: "Career day presentation" }];
+  return [
+    { title: "Career Day" },
+    { name: "description", content: "Brad Garropy's career day presentations" },
+  ];
 }
 
 export default function Index() {
   return (
-    <main className="snap-y snap-mandatory h-screen overflow-y-auto">
-      <Developer />
-      <Companies />
-      <Cloudflare />
-      <Dashboard />
-      <Tools />
-      <Office />
-      <Education />
-      <Subjects />
-      <Salary />
-      <Interesting />
-      <LiveCode />
-      <AIMagic />
-      <AIDemo />
-      <Questions />
+    <main className="grid place-content-center min-h-screen p-8">
+      <div className="text-center mb-12">
+        <h1 className="text-6xl font-bold">Career Day</h1>
+        <p className="mt-3 text-xl text-gray-600">Highland Park Elementary School</p>
+      </div>
+      <div className="grid gap-6 sm:grid-cols-2 max-w-2xl">
+        <Link
+          to="/2024"
+          className="border-2 border-gray-200 rounded-2xl p-8 text-center transition-colors hover:bg-gray-50 hover:border-gray-300"
+        >
+          <div className="text-5xl font-bold">2024</div>
+        </Link>
+        <Link
+          to="/2026"
+          className="border-2 border-gray-200 rounded-2xl p-8 text-center transition-colors hover:bg-gray-50 hover:border-gray-300"
+        >
+          <div className="text-5xl font-bold">2026</div>
+        </Link>
+      </div>
     </main>
   );
 }

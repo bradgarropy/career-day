@@ -1,11 +1,11 @@
 /**
  * 🎱 MAGIC 8-BALL — BACKUP IMPLEMENTATION
  *
- * This file is always live at `/demo/backup`.
- * It's the manual safety net if the live AI demo at `/demo` fails.
+ * This file is always live at `/2026/demo/backup`.
+ * It's the manual safety net if the live AI demo at `/2026/demo` fails.
  *
  * To use the fallback during the presentation:
- *   Navigate to /demo/backup in the browser.
+ *   Navigate to /2026/demo/backup in the browser.
  *   No git operations or AI tooling required.
  */
 
@@ -43,7 +43,7 @@ export default function Magic8Ball() {
   return (
     <main className="min-h-screen grid place-content-center gap-12 p-8 bg-white text-center">
       <a
-        href="/#ai-demo"
+        href="/2026/#ai-demo"
         className="absolute top-6 left-6 text-[#f6821f] font-bold text-xl no-underline"
       >
         ← back

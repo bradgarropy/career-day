@@ -17,6 +17,10 @@ export const ConfettiOnEnter = ({ sectionId }: ConfettiOnEnterProps) => {
     const target = document.getElementById(sectionId);
     if (!target) return;
 
+    // The actual scrolling container is the closest ancestor that scrolls.
+    // For the snap-scroll deck this is <main className="... overflow-y-auto h-screen">.
+    const root = target.parentElement;
+
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -82,7 +86,7 @@ export const ConfettiOnEnter = ({ sectionId }: ConfettiOnEnterProps) => {
           }
         }
       },
-      { threshold: [0.5] },
+      { root, threshold: [0.5] },
     );
 
     observer.observe(target);

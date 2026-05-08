@@ -10,8 +10,6 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { KeyboardNav } from "./components/KeyboardNav";
-import { PresenterHelp } from "./components/PresenterHelp";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/png", href: "/favicon.png" },
@@ -49,8 +47,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <ShikiProvider engine="javascript" languages={["markdown", "tsx"]}>
-      <KeyboardNav />
-      <PresenterHelp />
       <Outlet />
     </ShikiProvider>
   );

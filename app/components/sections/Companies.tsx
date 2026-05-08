@@ -11,7 +11,7 @@ export const Companies = () => {
         </a>
 
         <a href="https://apple.com" target="_blank" rel="noreferrer">
-          <img src="/images/apple.png" alt="apple logo" className="h-[18vh] max-w-full" />
+          <img src="/images/apple-black.png" alt="apple logo" className="h-[18vh] max-w-full" />
         </a>
 
         <a href="https://amazon.com" target="_blank" rel="noreferrer">

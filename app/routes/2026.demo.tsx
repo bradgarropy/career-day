@@ -5,7 +5,7 @@
  * with a working Magic 8-Ball implementation.
  *
  * If the AI demo fails, fallback:
- *   Navigate to /demo/backup in the browser.
+ *   Navigate to /2026/demo/backup in the browser.
  */
 
 export default function Magic8BallStub() {
@@ -14,12 +14,12 @@ export default function Magic8BallStub() {
       <h1 className="text-[5rem] font-extrabold">AI is building this... 🪄</h1>
       <p className="text-2xl opacity-70">
         (if it totally screws up,{" "}
-        <a href="/demo/backup" className="underline font-bold">
+        <a href="/2026/demo/backup" className="underline font-bold">
           click here
         </a>{" "}
         to see a working version)
       </p>
-      <a href="/#ai-demo" className="text-xl text-[#f6821f] font-bold">
+      <a href="/2026/#ai-demo" className="text-xl text-[#f6821f] font-bold">
         ← back
       </a>
     </main>

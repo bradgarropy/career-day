@@ -9,6 +9,10 @@
 
   /* Cloudflare brand colors */
   --color-cf-orange: #f6821f;
+
+  /* HPES brand colors */
+  --color-hpes-orange: #ffa500;
+  --color-hpes-blue: #0000cd;
 }
 
 html,
