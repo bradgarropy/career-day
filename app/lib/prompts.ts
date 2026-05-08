@@ -17,4 +17,4 @@ Show a big black circle with a white "8" in the middle of the screen. When click
 - "Try later!"
 - "100%!"
 
-Use Cloudflare orange (#F6821F) for any accent text. Make all text huge and kid-friendly. Add a big "Ask again" button below the ball. Add a small back link to "/" at the top.`;
+Use Cloudflare orange (#F6821F) for any accent text. Make all text huge and kid-friendly. Add a big "Ask again" button below the ball. Add a small back link to "/#ai-demo" at the top.`;
