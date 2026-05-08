@@ -1,3 +1,4 @@
+import { ShikiProvider } from "@cloudflare/kumo/code";
 import {
   isRouteErrorResponse,
   Links,
@@ -9,6 +10,8 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { KeyboardNav } from "./components/KeyboardNav";
+import { PresenterHelp } from "./components/PresenterHelp";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -29,6 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Career Day</title>
         <Meta />
         <Links />
       </head>
@@ -42,7 +46,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <ShikiProvider engine="javascript" languages={["markdown", "tsx"]}>
+      <KeyboardNav />
+      <PresenterHelp />
+      <Outlet />
+    </ShikiProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
@@ -53,9 +63,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   if (isRouteErrorResponse(error)) {
     message = error.status === 404 ? "404" : "Error";
     details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
+      error.status === 404 ? "The requested page could not be found." : error.statusText || details;
   } else if (import.meta.env.DEV && error && error instanceof Error) {
     details = error.message;
     stack = error.stack;
