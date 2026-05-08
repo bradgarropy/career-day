@@ -42,7 +42,10 @@ export default function Magic8Ball() {
 
   return (
     <main className="min-h-screen grid place-content-center gap-12 p-8 bg-white text-center">
-      <a href="/" className="absolute top-6 left-6 text-[#f6821f] font-bold text-xl no-underline">
+      <a
+        href="/#ai-demo"
+        className="absolute top-6 left-6 text-[#f6821f] font-bold text-xl no-underline"
+      >
         ← back
       </a>
 

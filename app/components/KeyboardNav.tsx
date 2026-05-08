@@ -10,21 +10,32 @@ import { SECTION_IDS } from "../lib/sections";
  * - ? toggles the presenter help overlay (handled in PresenterHelp)
  * - Esc exits fullscreen
  *
+ * Also keeps the URL hash (#section-id) in sync with the current slide so
+ * each slide is individually addressable. On load, scrolls to whatever
+ * slide the URL points at (e.g. /#salary).
+ *
  * This component renders nothing; it just attaches listeners.
  */
 export const KeyboardNav = () => {
   useEffect(() => {
+    /** The actual scrolling container is <main className="snap-y ... overflow-y-auto">. */
+    const getScroller = (): HTMLElement | null => {
+      const firstSection = document.getElementById(SECTION_IDS[0]);
+      return (firstSection?.parentElement as HTMLElement) ?? null;
+    };
+
     const getCurrentSectionIdx = (): number => {
-      // Find the section nearest to the top of the viewport.
-      const scrollY = window.scrollY + 1; // +1 to bias forward when right at boundary
+      const scroller = getScroller();
+      if (!scroller) return 0;
+      const scrollTop = scroller.scrollTop + 1; // +1 to bias forward when right at boundary
       let bestIdx = 0;
       let bestDelta = Infinity;
       for (let i = 0; i < SECTION_IDS.length; i++) {
         const el = document.getElementById(SECTION_IDS[i]);
         if (!el) continue;
-        const top = el.getBoundingClientRect().top + window.scrollY;
-        const delta = Math.abs(top - scrollY + 1);
-        if (top <= scrollY + 50 && delta < bestDelta) {
+        const top = el.offsetTop;
+        const delta = Math.abs(top - scrollTop);
+        if (top <= scrollTop + 50 && delta < bestDelta) {
           bestIdx = i;
           bestDelta = delta;
         }
@@ -32,10 +43,18 @@ export const KeyboardNav = () => {
       return bestIdx;
     };
 
+    const updateHash = (id: string) => {
+      // Use replaceState so back-button doesn't accumulate every slide
+      const url = `${window.location.pathname}${window.location.search}#${id}`;
+      window.history.replaceState(null, "", url);
+    };
+
     const scrollTo = (idx: number) => {
       const clamped = Math.max(0, Math.min(SECTION_IDS.length - 1, idx));
-      const el = document.getElementById(SECTION_IDS[clamped]);
+      const id = SECTION_IDS[clamped];
+      const el = document.getElementById(id);
       el?.scrollIntoView({ behavior: "smooth" });
+      updateHash(id);
     };
 
     const next = () => scrollTo(getCurrentSectionIdx() + 1);
@@ -49,6 +68,38 @@ export const KeyboardNav = () => {
       }
     };
 
+    // 1. Honor URL hash on load — scroll directly to that slide
+    const hash = window.location.hash.replace(/^#/, "");
+    if (hash) {
+      // Wait a tick for the DOM/layout to settle; scroll-snap can fight us otherwise
+      window.setTimeout(() => {
+        const el = document.getElementById(hash);
+        el?.scrollIntoView({ behavior: "auto" });
+      }, 0);
+    }
+
+    // 2. Update hash whenever the user scrolls (manual or via keyboard)
+    const scroller = getScroller();
+    let scrollDebounce: number | undefined;
+    const onScroll = () => {
+      window.clearTimeout(scrollDebounce);
+      scrollDebounce = window.setTimeout(() => {
+        const idx = getCurrentSectionIdx();
+        const currentHash = window.location.hash.replace(/^#/, "");
+        const newId = SECTION_IDS[idx];
+        if (currentHash !== newId) updateHash(newId);
+      }, 100);
+    };
+    scroller?.addEventListener("scroll", onScroll, { passive: true });
+
+    // 3. Respond to back/forward buttons changing the hash
+    const onHashChange = () => {
+      const id = window.location.hash.replace(/^#/, "");
+      if (id) document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    };
+    window.addEventListener("hashchange", onHashChange);
+
+    // 4. Keyboard navigation
     const onKeyDown = (e: KeyboardEvent) => {
       // Ignore when typing in inputs
       const target = e.target as HTMLElement | null;
@@ -92,9 +143,14 @@ export const KeyboardNav = () => {
           break;
       }
     };
-
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("hashchange", onHashChange);
+      scroller?.removeEventListener("scroll", onScroll);
+      window.clearTimeout(scrollDebounce);
+    };
   }, []);
 
   return null;

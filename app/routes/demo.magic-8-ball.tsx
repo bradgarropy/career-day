@@ -19,7 +19,7 @@ export default function Magic8BallStub() {
         </a>{" "}
         to see a working version)
       </p>
-      <a href="/" className="text-xl text-[#f6821f] font-bold">
+      <a href="/#ai-demo" className="text-xl text-[#f6821f] font-bold">
         ← back
       </a>
     </main>
