@@ -1,11 +1,11 @@
 /**
  * 🎱 MAGIC 8-BALL — BACKUP IMPLEMENTATION
  *
- * This file is always live at `/demo/magic-8-ball/backup`.
- * It's the manual safety net if the live AI demo at `/demo/magic-8-ball` fails.
+ * This file is always live at `/demo/backup`.
+ * It's the manual safety net if the live AI demo at `/demo` fails.
  *
  * To use the fallback during the presentation:
- *   Navigate to /demo/magic-8-ball/backup in the browser.
+ *   Navigate to /demo/backup in the browser.
  *   No git operations or AI tooling required.
  */
 

@@ -4,7 +4,7 @@
  * Practice this with opencode 3x before the presentation.
  * If output varies, refine the prompt until consistent.
  */
-export const MAGIC_8_BALL_PROMPT = `Build a Magic 8-Ball at app/routes/demo.magic-8-ball.tsx for our React Router 7 app.
+export const MAGIC_8_BALL_PROMPT = `Build a Magic 8-Ball at app/routes/demo.tsx for our React Router 7 app.
 
 Show a big black circle with a white "8" in the middle of the screen. When clicked, it should shake briefly using motion (the motion package is installed), then reveal a random fun answer from this list inside the 8-ball:
 

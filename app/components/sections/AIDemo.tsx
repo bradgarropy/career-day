@@ -15,7 +15,7 @@ export const AIDemo = () => {
 
       <div className="mt-8 text-center">
         <a
-          href="/demo/magic-8-ball"
+          href="/demo"
           className="inline-block px-10 py-4 bg-black text-white rounded-xl font-bold text-2xl no-underline"
         >
           Try it now! →
